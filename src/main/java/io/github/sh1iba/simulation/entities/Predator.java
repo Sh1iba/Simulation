@@ -10,11 +10,21 @@ TODO Predator
 public class Predator extends Creature {
     public int attackPower;
 
-    public void move(){
+    @Override
+    public void makeMove() {
+        super.makeMove();
+    }
+
+    public void attack() {
 
     }
 
-    public void attack(){
-
+    public int getAttackPower() {
+        return attackPower;
     }
+
+    public void setAttackPower(int attackPower) {
+        this.attackPower = attackPower;
+    }
+
 }

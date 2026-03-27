@@ -5,5 +5,5 @@ TODO Grass
    Grass - ресурс для травоядных.
  */
 
-public class Grass {
+public class Grass extends Entity{
 }

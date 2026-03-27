@@ -5,5 +5,5 @@ TODO Tree
    Rock, Tree - статичные объекты.
  */
 
-public class Tree {
+public class Tree extends Entity{
 }

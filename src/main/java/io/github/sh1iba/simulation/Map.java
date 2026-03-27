@@ -7,5 +7,27 @@ TODO Map
    а подумать какие ещё коллекции могут подойти.
  */
 
+import main.java.io.github.sh1iba.simulation.entities.Entity;
+
+import java.util.HashMap;
+
 public class Map {
+
+    private final int width;
+    private final int height;
+
+    HashMap<Coordinates,Entity> map = new HashMap<>();
+
+    public Map(int width, int height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
 }
