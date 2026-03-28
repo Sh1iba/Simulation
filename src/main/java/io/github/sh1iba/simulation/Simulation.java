@@ -24,26 +24,30 @@ public class Simulation {
     MapConsoleRenderer renderer = new MapConsoleRenderer();
     Map map = new Map(40, 15);
     List<Action> initActions = new ArrayList<>();
+    List<Action> turnActions = new ArrayList<>();
 
     private void nextTurn() {
 
     }
 
+    private void addInitActions() {
+        initActions.add(new PlaceGrassAction());
+        initActions.add(new PlaceHerbivoresAction());
+        initActions.add(new PlacePredatorsAction());
+        initActions.add(new PlaceRocksAction());
+        initActions.add(new PlaceTreesAction());
+    }
+
     private void init() {
+        addInitActions();
+        for (Action action : initActions){
+            action.perform(map);
+        }
 
     }
 
     public void startSimulation() {
-        PlaceEntityAction action = new PlaceGrassAction();
-        action.perform(map);
-        action = new PlaceHerbivoresAction();
-        action.perform(map);
-        action = new PlacePredatorsAction();
-        action.perform(map);
-        action = new PlaceRocksAction();
-        action.perform(map);
-        action = new PlaceTreesAction();
-        action.perform(map);
+        init();
         renderer.render(map);
     }
 
