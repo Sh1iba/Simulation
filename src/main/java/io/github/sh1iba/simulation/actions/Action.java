@@ -1,5 +1,7 @@
 package main.java.io.github.sh1iba.simulation.actions;
 
+import main.java.io.github.sh1iba.simulation.Map;
+
 /*
 TODO Actions
      Action - действие, совершаемое над миром. Например - сходить всеми существами.
@@ -11,6 +13,6 @@ TODO Actions
  */
 public interface Action {
 
-    void perform();
+    void perform(Map map);
 
 }

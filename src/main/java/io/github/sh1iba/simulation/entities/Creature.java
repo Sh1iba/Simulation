@@ -8,6 +8,7 @@ TODO Creature
  */
 
 public abstract class Creature extends Entity {
+
     public int speed = 0;
     public int healthPoint = 0;
 

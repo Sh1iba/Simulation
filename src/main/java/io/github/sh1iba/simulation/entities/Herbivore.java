@@ -8,7 +8,7 @@ TODO Herbivore
  */
 
 public class Herbivore extends Creature {
-
+    public static final String SYMBOL = "\uD83D\uDC04";
     @Override
     public void makeMove() {
         super.makeMove();
@@ -18,4 +18,8 @@ public class Herbivore extends Creature {
 
     }
 
+    @Override
+    public String getSymbol() {
+        return SYMBOL;
+    }
 }

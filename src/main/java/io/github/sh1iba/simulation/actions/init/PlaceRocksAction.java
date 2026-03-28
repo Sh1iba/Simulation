@@ -1,20 +1,18 @@
 package main.java.io.github.sh1iba.simulation.actions.init;
 
 import main.java.io.github.sh1iba.simulation.entities.Entity;
-import main.java.io.github.sh1iba.simulation.entities.Grass;
+import main.java.io.github.sh1iba.simulation.entities.Rock;
 
-public class PlaceGrassAction extends PlaceEntityAction {
-
-    private static final double GRASS_DENSITY = 0.15;
+public class PlaceRocksAction extends PlaceEntityAction {
+    private static final double ROCKS_DENSITY = 0.07;
 
     @Override
     protected Entity getEntity() {
-        return new Grass();
+        return new Rock();
     }
 
     @Override
     protected double getDensity() {
-        return GRASS_DENSITY;
+        return ROCKS_DENSITY;
     }
-
 }

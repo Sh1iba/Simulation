@@ -23,6 +23,22 @@ public class Map {
         this.height = height;
     }
 
+    public void setEntity(Coordinates coordinates, Entity entity){
+        map.put(coordinates, entity);
+    }
+
+    public Entity getEntity(Coordinates coordinates){
+        return map.get(coordinates);
+    }
+
+    public void removeEntity(Coordinates coordinates){
+        map.remove(coordinates);
+    }
+
+    public boolean isSquareEmpty(Coordinates coordinates){
+        return !map.containsKey(coordinates);
+    }
+
     public int getHeight() {
         return height;
     }
@@ -30,4 +46,5 @@ public class Map {
     public int getWidth() {
         return width;
     }
+
 }

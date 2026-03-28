@@ -1,9 +1,10 @@
 package main.java.io.github.sh1iba.simulation.entities;
 
-/*
-TODO Rock
-   Rock, Tree - статичные объекты.
- */
-
 public class Rock extends Entity {
+    public static final String SYMBOL = "⛰\uFE0F";
+
+    @Override
+    public String getSymbol() {
+        return SYMBOL;
+    }
 }

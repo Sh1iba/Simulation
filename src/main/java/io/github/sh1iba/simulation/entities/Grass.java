@@ -1,9 +1,10 @@
 package main.java.io.github.sh1iba.simulation.entities;
 
-/*
-TODO Grass
-   Grass - ресурс для травоядных.
- */
+public class Grass extends Entity {
+    public static final String SYMBOL = "\uD83C\uDF3F";
 
-public class Grass extends Entity{
+    @Override
+    public String getSymbol(){
+        return SYMBOL;
+    }
 }

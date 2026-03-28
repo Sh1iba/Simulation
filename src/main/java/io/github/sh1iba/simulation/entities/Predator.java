@@ -8,6 +8,7 @@ TODO Predator
  */
 
 public class Predator extends Creature {
+    public static final String SYMBOL = "\uD83D\uDC3A";
     public int attackPower;
 
     @Override
@@ -27,4 +28,8 @@ public class Predator extends Creature {
         this.attackPower = attackPower;
     }
 
+    @Override
+    public String getSymbol() {
+        return SYMBOL;
+    }
 }
