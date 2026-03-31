@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Simulation {
+    private final int counterOfMoves = 0;
     MapConsoleRenderer renderer = new MapConsoleRenderer();
     Map map = new Map(40, 15);
     List<Action> initActions = new ArrayList<>();
@@ -40,7 +41,7 @@ public class Simulation {
 
     private void init() {
         addInitActions();
-        for (Action action : initActions){
+        for (Action action : initActions) {
             action.perform(map);
         }
 

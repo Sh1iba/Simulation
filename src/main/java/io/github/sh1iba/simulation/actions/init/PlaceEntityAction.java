@@ -4,6 +4,7 @@ import main.java.io.github.sh1iba.simulation.Coordinates;
 import main.java.io.github.sh1iba.simulation.Map;
 import main.java.io.github.sh1iba.simulation.actions.Action;
 import main.java.io.github.sh1iba.simulation.entities.Entity;
+
 import java.util.Random;
 
 public abstract class PlaceEntityAction implements Action {
@@ -16,13 +17,13 @@ public abstract class PlaceEntityAction implements Action {
 
     @Override
     public void perform(Map map) {
-        int entitiesToPlace = getEntitiesToPlace(map);
+        int entitiesCountToPlace = getEntitiesCountToPlace(map);
 
-        while (entitiesToPlace > 0) {
+        while (entitiesCountToPlace > 0) {
             Coordinates coordinates = getRandomCoordinates(map);
             if (map.isSquareEmpty(coordinates)) {
                 map.setEntity(coordinates, getEntity());
-                entitiesToPlace--;
+                entitiesCountToPlace--;
             }
         }
     }
@@ -33,7 +34,7 @@ public abstract class PlaceEntityAction implements Action {
         return new Coordinates(x, y);
     }
 
-    private int getEntitiesToPlace(Map map) {
+    private int getEntitiesCountToPlace(Map map) {
         return (int) (map.getHeight() * map.getWidth() * getDensity());
     }
 

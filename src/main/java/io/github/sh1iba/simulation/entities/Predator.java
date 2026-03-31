@@ -8,8 +8,8 @@ TODO Predator
  */
 
 public class Predator extends Creature {
-    public static final String SYMBOL = "\uD83D\uDC3A";
-    public int attackPower;
+    private static final String SYMBOL = "\uD83D\uDC3A";
+    private int attackPower;
 
     @Override
     public void makeMove() {
