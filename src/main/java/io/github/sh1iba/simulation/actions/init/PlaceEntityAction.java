@@ -1,7 +1,7 @@
 package main.java.io.github.sh1iba.simulation.actions.init;
 
 import main.java.io.github.sh1iba.simulation.Coordinates;
-import main.java.io.github.sh1iba.simulation.Map;
+import main.java.io.github.sh1iba.simulation.GameMap;
 import main.java.io.github.sh1iba.simulation.actions.Action;
 import main.java.io.github.sh1iba.simulation.entities.Entity;
 
@@ -16,7 +16,7 @@ public abstract class PlaceEntityAction implements Action {
     protected abstract double getDensity();
 
     @Override
-    public void perform(Map map) {
+    public void perform(GameMap map) {
         int entitiesCountToPlace = getEntitiesCountToPlace(map);
 
         while (entitiesCountToPlace > 0) {
@@ -28,13 +28,13 @@ public abstract class PlaceEntityAction implements Action {
         }
     }
 
-    private Coordinates getRandomCoordinates(Map map) {
+    private Coordinates getRandomCoordinates(GameMap map) {
         int x = random.nextInt(map.getWidth());
         int y = random.nextInt(map.getHeight());
         return new Coordinates(x, y);
     }
 
-    private int getEntitiesCountToPlace(Map map) {
+    private int getEntitiesCountToPlace(GameMap map) {
         return (int) (map.getHeight() * map.getWidth() * getDensity());
     }
 

@@ -23,7 +23,7 @@ import java.util.List;
 public class Simulation {
     private final int counterOfMoves = 0;
     MapConsoleRenderer renderer = new MapConsoleRenderer();
-    Map map = new Map(40, 15);
+    GameMap map = new GameMap(40, 15);
     List<Action> initActions = new ArrayList<>();
     List<Action> turnActions = new ArrayList<>();
 

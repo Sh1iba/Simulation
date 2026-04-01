@@ -11,17 +11,18 @@ import main.java.io.github.sh1iba.simulation.entities.Entity;
 
 import java.util.HashMap;
 
-public class Map {
+public class GameMap {
 
     private final int width;
     private final int height;
 
     HashMap<Coordinates,Entity> map = new HashMap<>();
 
-    public Map(int width, int height) {
+    public GameMap(int width, int height) {
         this.width = width;
         this.height = height;
     }
+
 
     public void setEntity(Coordinates coordinates, Entity entity){
         map.put(coordinates, entity);

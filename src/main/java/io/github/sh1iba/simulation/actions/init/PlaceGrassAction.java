@@ -5,7 +5,7 @@ import main.java.io.github.sh1iba.simulation.entities.Grass;
 
 public class PlaceGrassAction extends PlaceEntityAction {
 
-    private static final double GRASS_DENSITY = 0.15;
+    private static final double GRASS_DENSITY = 0.10;
 
     @Override
     protected Entity getEntity() {

@@ -1,6 +1,6 @@
 package main.java.io.github.sh1iba.simulation.actions;
 
-import main.java.io.github.sh1iba.simulation.Map;
+import main.java.io.github.sh1iba.simulation.GameMap;
 
 /*
 TODO Actions
@@ -13,6 +13,6 @@ TODO Actions
  */
 public interface Action {
 
-    void perform(Map map);
+    void perform(GameMap map);
 
 }

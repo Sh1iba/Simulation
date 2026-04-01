@@ -1,10 +1,10 @@
 package main.java.io.github.sh1iba.simulation.search;
 
 import main.java.io.github.sh1iba.simulation.Coordinates;
-import main.java.io.github.sh1iba.simulation.Map;
+import main.java.io.github.sh1iba.simulation.GameMap;
 
 import java.util.List;
 
 public interface Search {
-    List<Coordinates> findPath(Map map, Coordinates start, Class<?> target);
+    List<Coordinates> findPath(GameMap map, Coordinates start, Class<?> target);
 }

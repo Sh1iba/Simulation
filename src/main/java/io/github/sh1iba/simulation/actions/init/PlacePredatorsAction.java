@@ -4,7 +4,7 @@ import main.java.io.github.sh1iba.simulation.entities.Entity;
 import main.java.io.github.sh1iba.simulation.entities.Predator;
 
 public class PlacePredatorsAction extends PlaceEntityAction {
-    private static final double PREDATORS_DENSITY = 0.03;
+    private static final double PREDATORS_DENSITY = 0.02;
 
     @Override
     protected Entity getEntity() {
