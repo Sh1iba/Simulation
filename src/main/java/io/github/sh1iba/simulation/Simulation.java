@@ -31,17 +31,6 @@ public class Simulation {
     private final List<Action> turnActions = new ArrayList<>();
 
     private void nextTurn() {
-        for (Action action : turnActions) {
-            action.perform(map);
-        }
-        renderer.render(map);
-
-        // Небольшая задержка, чтобы видеть изменения
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
     }
 
     private void addInitActions() {
@@ -63,7 +52,6 @@ public class Simulation {
         for (Action action : initActions) {
             action.perform(map);
         }
-        renderer.render(map); // Первый рендер
     }
 
     public void startSimulation() {
@@ -72,7 +60,6 @@ public class Simulation {
             for (Action action : turnActions) {
                 action.perform(map);
                 System.out.println();
-                renderer.render(map);
             }
 
 

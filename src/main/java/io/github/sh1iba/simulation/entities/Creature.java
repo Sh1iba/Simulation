@@ -3,6 +3,7 @@ package main.java.io.github.sh1iba.simulation.entities;
 
 import main.java.io.github.sh1iba.simulation.Coordinates;
 import main.java.io.github.sh1iba.simulation.GameMap;
+import main.java.io.github.sh1iba.simulation.MapConsoleRenderer;
 import main.java.io.github.sh1iba.simulation.search.BreadthFirstSearch;
 import main.java.io.github.sh1iba.simulation.search.Search;
 
@@ -17,28 +18,35 @@ public abstract class Creature extends Entity {
     private final Search search = new BreadthFirstSearch();
 
     public void makeMove(GameMap map, Coordinates coordinates) {
-        List<Coordinates> pathToTarget = search.findPath(map, coordinates, getTargetClass());
-        if (pathToTarget.size() < 2) return;
-        int i = 1;
-        Coordinates old = coordinates;
-        while (i <= getSpeed()) {
-            if (getTargetClass().isInstance(map.getEntity(pathToTarget.get(i)))) {
-                interact(pathToTarget.get(i));
+        int i = 0;
+        Coordinates current = coordinates;
+        while (i < getSpeed()) {
+            List<Coordinates> pathToTarget = search.findPath(map, current, getTargetClass());
+            if (pathToTarget.size() < 2) return;
+
+            Coordinates next = pathToTarget.get(1);
+
+            if (getTargetClass().isInstance(map.getEntity(next))) {
+                interact(next, map);
                 return;
             }
-            map.removeEntity(old);
-            Coordinates current = pathToTarget.get(i);
-            if (map.getEntity(current) == null) {
-                map.setEntity(current, this);
+
+            map.removeEntity(current);
+            if (map.getEntity(next) == null) {
+                map.setEntity(next, this);
             }
+            MapConsoleRenderer renderer = new MapConsoleRenderer();
+            renderer.render(map);
+            System.out.println();
+            current = next;
             i++;
-            old = current;
+
         }
     }
 
     abstract public Class<? extends Entity> getTargetClass();
 
-    abstract public void interact(Coordinates coordinates);
+    abstract public void interact(Coordinates coordinates, GameMap map);
 
     abstract public int getSpeed();
 

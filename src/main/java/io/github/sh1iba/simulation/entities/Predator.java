@@ -8,16 +8,17 @@ TODO Predator
  */
 
 import main.java.io.github.sh1iba.simulation.Coordinates;
+import main.java.io.github.sh1iba.simulation.GameMap;
 
 public class Predator extends Creature {
 
-    private static final String SYMBOL = "\uD83D\uDC3A";
+    private static final String SYMBOL = "\uD83D\uDC79";
 
     private final int attackPower;
 
     public Predator() {
         this.healthPoint = 100;
-        this.speed = 4;
+        this.speed = 6;
         this.attackPower = 25;
     }
 
@@ -27,7 +28,7 @@ public class Predator extends Creature {
     }
 
     @Override
-    public void interact(Coordinates coordinates) {
+    public void interact(Coordinates coordinates, GameMap map) {
 
     }
 
