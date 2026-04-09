@@ -12,12 +12,12 @@ import java.util.HashMap;
 
 public class BreadthFirstSearch implements Search {
 
-    private final Set<Coordinates> visited = new HashSet<>();
-    private final Queue<Coordinates> queue = new LinkedList<>();
-    private final Map<Coordinates, Coordinates> roadMap = new HashMap<>();
 
     @Override
-    public List<Coordinates> findPath(GameMap map, Coordinates start, Class<?> target) {
+    public List<Coordinates> findPath(GameMap map, Coordinates start, Class<? extends Entity> target) {
+        Set<Coordinates> visited = new HashSet<>();
+        Queue<Coordinates> queue = new LinkedList<>();
+        Map<Coordinates, Coordinates> roadMap = new HashMap<>();
 
         roadMap.put(start, null);
         visited.add(start);
@@ -53,7 +53,7 @@ public class BreadthFirstSearch implements Search {
         return path.reversed();
     }
 
-    private boolean isAvailableEntity(GameMap map, Coordinates coordinates, Class<?> target) {
+    private boolean isAvailableEntity(GameMap map, Coordinates coordinates, Class<? extends Entity> target) {
         Entity entity = map.getEntity(coordinates);
         if (entity instanceof Predator) return false;
         if (entity instanceof Rock) return false;
@@ -66,7 +66,7 @@ public class BreadthFirstSearch implements Search {
         return true;
     }
 
-    private boolean isTarget(GameMap map, Coordinates coordinates, Class<?> target) {
+    private boolean isTarget(GameMap map, Coordinates coordinates, Class<? extends Entity> target) {
         Entity entity = map.getEntity(coordinates);
         return target.isInstance(entity);
     }
@@ -82,7 +82,7 @@ public class BreadthFirstSearch implements Search {
     private List<Coordinates> getNeighboringCoordinates(GameMap map, Coordinates current) {
         List<Coordinates> neighboringCoordinates = new ArrayList<>();
         int x = current.getX();
-        int y = current.getY();
+        int y = current. getY();
 
         if (isValidCoordinate(map, new Coordinates(x, y + 1))) {
             neighboringCoordinates.add(new Coordinates(x, y + 1));

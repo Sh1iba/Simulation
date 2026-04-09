@@ -7,13 +7,33 @@ TODO Predator
    Атаковать травоядное. При этом количество HP травоядного уменьшается на силу атаки хищника. Если значение HP жертвы опускается до 0, травоядное исчезает
  */
 
+import main.java.io.github.sh1iba.simulation.Coordinates;
+
 public class Predator extends Creature {
+
     private static final String SYMBOL = "\uD83D\uDC3A";
-    private int attackPower;
+
+    private final int attackPower;
+
+    public Predator() {
+        this.healthPoint = 100;
+        this.speed = 4;
+        this.attackPower = 25;
+    }
 
     @Override
-    public void makeMove() {
-        super.makeMove();
+    public Class<? extends Entity> getTargetClass() {
+        return Herbivore.class;
+    }
+
+    @Override
+    public void interact(Coordinates coordinates) {
+
+    }
+
+    @Override
+    public int getSpeed() {
+        return speed;
     }
 
     public void attack() {
@@ -22,10 +42,6 @@ public class Predator extends Creature {
 
     public int getAttackPower() {
         return attackPower;
-    }
-
-    public void setAttackPower(int attackPower) {
-        this.attackPower = attackPower;
     }
 
     @Override

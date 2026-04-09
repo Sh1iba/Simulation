@@ -1,22 +1,30 @@
 package main.java.io.github.sh1iba.simulation.entities;
 
-/*
-TODO Herbivore
-   Травоядное, наследуется от Creature.
-   Стремятся найти ресурс (траву), может потратить свой ход на движение в сторону травы,
-   либо на её поглощение.
- */
 
-import main.java.io.github.sh1iba.simulation.search.BreadthFirstSearch;
-import main.java.io.github.sh1iba.simulation.search.Search;
+import main.java.io.github.sh1iba.simulation.Coordinates;
 
 public class Herbivore extends Creature {
     private static final String SYMBOL = "\uD83D\uDC04";
-    Search search = new BreadthFirstSearch();
+
+    public Herbivore() {
+        this.healthPoint = 75;
+        this.speed = 2;
+    }
 
     @Override
-    public void makeMove() {
-        super.makeMove();
+    public Class<? extends Entity> getTargetClass() {
+        return Grass.class;
+    }
+
+    @Override
+    public void interact(Coordinates coordinates) {
+        eat();
+    }
+
+
+    @Override
+    public int getSpeed() {
+        return speed;
     }
 
     public void eat() {

@@ -16,19 +16,32 @@ TODO Simulation
 
 import main.java.io.github.sh1iba.simulation.actions.Action;
 import main.java.io.github.sh1iba.simulation.actions.init.*;
+import main.java.io.github.sh1iba.simulation.actions.turn.MoveHerbivoresAction;
+import main.java.io.github.sh1iba.simulation.actions.turn.MovePredatorsAction;
+import main.java.io.github.sh1iba.simulation.entities.Herbivore;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Simulation {
-    private final int counterOfMoves = 0;
-    MapConsoleRenderer renderer = new MapConsoleRenderer();
-    GameMap map = new GameMap(40, 15);
-    List<Action> initActions = new ArrayList<>();
-    List<Action> turnActions = new ArrayList<>();
+    private volatile boolean running = false;
+    private final MapConsoleRenderer renderer = new MapConsoleRenderer();
+    private final GameMap map = new GameMap(40, 15);
+    private final List<Action> initActions = new ArrayList<>();
+    private final List<Action> turnActions = new ArrayList<>();
 
     private void nextTurn() {
+        for (Action action : turnActions) {
+            action.perform(map);
+        }
+        renderer.render(map);
 
+        // Небольшая задержка, чтобы видеть изменения
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
 
     private void addInitActions() {
@@ -39,20 +52,37 @@ public class Simulation {
         initActions.add(new PlaceTreesAction());
     }
 
+    private void addTurnAction() {
+        turnActions.add(new MoveHerbivoresAction());
+        // turnActions.add(new MovePredatorsAction());
+    }
+
     private void init() {
         addInitActions();
+        addTurnAction();
         for (Action action : initActions) {
             action.perform(map);
         }
-
+        renderer.render(map); // Первый рендер
     }
 
     public void startSimulation() {
         init();
-        renderer.render(map);
+
+            for (Action action : turnActions) {
+                action.perform(map);
+                System.out.println();
+                renderer.render(map);
+            }
+
+
     }
 
     public void pauseSimulation() {
+        running = false;
+    }
 
+    public void stopSimulation() {
+        running = false;
     }
 }

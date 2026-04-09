@@ -1,32 +1,45 @@
 package main.java.io.github.sh1iba.simulation.entities;
 
-/*
-TODO Creature
-   Абстрактный класс, наследуется от Entity.
-   Существо, имеет скорость (сколько клеток может пройти за 1 ход),
-   количество HP. Имеет метод makeMove() - сделать ход.
- */
+
+import main.java.io.github.sh1iba.simulation.Coordinates;
+import main.java.io.github.sh1iba.simulation.GameMap;
+import main.java.io.github.sh1iba.simulation.search.BreadthFirstSearch;
+import main.java.io.github.sh1iba.simulation.search.Search;
+
+import java.util.List;
 
 public abstract class Creature extends Entity {
+
     public int speed = 0;
+
     public int healthPoint = 0;
 
-    public void makeMove(){}
+    private final Search search = new BreadthFirstSearch();
 
-    public int getHealthPoint() {
-        return healthPoint;
+    public void makeMove(GameMap map, Coordinates coordinates) {
+        List<Coordinates> pathToTarget = search.findPath(map, coordinates, getTargetClass());
+        if (pathToTarget.size() < 2) return;
+        int i = 1;
+        Coordinates old = coordinates;
+        while (i <= getSpeed()) {
+            if (getTargetClass().isInstance(map.getEntity(pathToTarget.get(i)))) {
+                interact(pathToTarget.get(i));
+                return;
+            }
+            map.removeEntity(old);
+            Coordinates current = pathToTarget.get(i);
+            if (map.getEntity(current) == null) {
+                map.setEntity(current, this);
+            }
+            i++;
+            old = current;
+        }
     }
 
-    public void setHealthPoint(int healthPoint) {
-        this.healthPoint = healthPoint;
-    }
+    abstract public Class<? extends Entity> getTargetClass();
 
-    public int getSpeed() {
-        return speed;
-    }
+    abstract public void interact(Coordinates coordinates);
 
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
+    abstract public int getSpeed();
 
 }
