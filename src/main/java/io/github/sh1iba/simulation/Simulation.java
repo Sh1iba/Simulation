@@ -18,19 +18,19 @@ import main.java.io.github.sh1iba.simulation.actions.Action;
 import main.java.io.github.sh1iba.simulation.actions.init.*;
 import main.java.io.github.sh1iba.simulation.actions.turn.MoveHerbivoresAction;
 import main.java.io.github.sh1iba.simulation.actions.turn.MovePredatorsAction;
-import main.java.io.github.sh1iba.simulation.entities.Herbivore;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Simulation {
-    private volatile boolean running = false;
+    private int counterOfMoves = 0;
     private final MapConsoleRenderer renderer = new MapConsoleRenderer();
     private final GameMap map = new GameMap(40, 15);
     private final List<Action> initActions = new ArrayList<>();
     private final List<Action> turnActions = new ArrayList<>();
 
     private void nextTurn() {
+
     }
 
     private void addInitActions() {
@@ -43,7 +43,7 @@ public class Simulation {
 
     private void addTurnAction() {
         turnActions.add(new MoveHerbivoresAction());
-        // turnActions.add(new MovePredatorsAction());
+        turnActions.add(new MovePredatorsAction());
     }
 
     private void init() {
@@ -52,24 +52,30 @@ public class Simulation {
         for (Action action : initActions) {
             action.perform(map);
         }
+        renderer.render(map);
+        System.out.println();
     }
 
     public void startSimulation() {
         init();
-
+        while (true) {
             for (Action action : turnActions) {
                 action.perform(map);
+                System.out.printf("Ход %s", counterOfMoves++);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                renderer.render(map);
                 System.out.println();
             }
 
-
+        }
     }
 
     public void pauseSimulation() {
-        running = false;
+
     }
 
-    public void stopSimulation() {
-        running = false;
-    }
 }

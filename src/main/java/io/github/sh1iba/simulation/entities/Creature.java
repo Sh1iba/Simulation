@@ -35,9 +35,7 @@ public abstract class Creature extends Entity {
             if (map.getEntity(next) == null) {
                 map.setEntity(next, this);
             }
-            MapConsoleRenderer renderer = new MapConsoleRenderer();
-            renderer.render(map);
-            System.out.println();
+
             current = next;
             i++;
 

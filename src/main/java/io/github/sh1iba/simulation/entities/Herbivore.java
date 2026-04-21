@@ -22,14 +22,13 @@ public class Herbivore extends Creature {
         eat(coordinates, map);
     }
 
-
     @Override
     public int getSpeed() {
         return speed;
     }
 
     public void eat(Coordinates coordinates, GameMap map) {
-        if(getTargetClass().isInstance(map.getEntity(coordinates))){
+        if (getTargetClass().isInstance(map.getEntity(coordinates))) {
             map.removeEntity(coordinates);
         }
     }

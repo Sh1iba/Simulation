@@ -1,12 +1,5 @@
 package main.java.io.github.sh1iba.simulation.entities;
 
-/*
-TODO Predator
-   Хищник, наследуется от Creature. В дополнение к полям класса Creature, имеет силу атаки. На что может потратить ход хищник:
-   Переместиться (чтобы приблизиться к жертве - травоядному)
-   Атаковать травоядное. При этом количество HP травоядного уменьшается на силу атаки хищника. Если значение HP жертвы опускается до 0, травоядное исчезает
- */
-
 import main.java.io.github.sh1iba.simulation.Coordinates;
 import main.java.io.github.sh1iba.simulation.GameMap;
 
@@ -29,7 +22,7 @@ public class Predator extends Creature {
 
     @Override
     public void interact(Coordinates coordinates, GameMap map) {
-
+        attack(coordinates, map);
     }
 
     @Override
@@ -37,8 +30,14 @@ public class Predator extends Creature {
         return speed;
     }
 
-    public void attack() {
-
+    public void attack(Coordinates coordinates, GameMap map) {
+        if (getTargetClass().isInstance(map.getEntity(coordinates))) {
+            Creature creature = (Creature) map.getEntity(coordinates);
+            creature.healthPoint -= attackPower;
+            if (creature.healthPoint == 0) {
+                map.removeEntity(coordinates);
+            }
+        }
     }
 
     public int getAttackPower() {
