@@ -3,7 +3,6 @@ package main.java.io.github.sh1iba.simulation.entities;
 
 import main.java.io.github.sh1iba.simulation.Coordinates;
 import main.java.io.github.sh1iba.simulation.GameMap;
-import main.java.io.github.sh1iba.simulation.MapConsoleRenderer;
 import main.java.io.github.sh1iba.simulation.search.BreadthFirstSearch;
 import main.java.io.github.sh1iba.simulation.search.Search;
 

@@ -7,9 +7,6 @@ import main.java.io.github.sh1iba.simulation.entities.*;
 import java.util.*;
 import java.util.HashMap;
 
-//TODO написать метод который возвращает соседние координаты
-//TODO метод который проверяет не попадут ли камни деревья или другие нежелательные сущности
-
 public class BreadthFirstSearch implements Search {
 
 
@@ -78,11 +75,10 @@ public class BreadthFirstSearch implements Search {
         return x >= 0 && x < map.getWidth() && y >= 0 && y < map.getHeight();
     }
 
-    //TODO понять не вышли ли мы за границы карты
     private List<Coordinates> getNeighboringCoordinates(GameMap map, Coordinates current) {
         List<Coordinates> neighboringCoordinates = new ArrayList<>();
         int x = current.getX();
-        int y = current. getY();
+        int y = current.getY();
 
         if (isValidCoordinate(map, new Coordinates(x, y + 1))) {
             neighboringCoordinates.add(new Coordinates(x, y + 1));
@@ -98,6 +94,5 @@ public class BreadthFirstSearch implements Search {
         }
         return neighboringCoordinates;
     }
-
 
 }

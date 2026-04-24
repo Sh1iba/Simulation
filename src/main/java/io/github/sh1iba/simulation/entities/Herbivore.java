@@ -6,10 +6,11 @@ import main.java.io.github.sh1iba.simulation.GameMap;
 
 public class Herbivore extends Creature {
     private static final String SYMBOL = "\uD83D\uDC04";
+    private static final int MAX_HEALTH_POINT = 75;
 
     public Herbivore() {
-        this.healthPoint = 75;
-        this.speed = 4;
+        this.healthPoint = MAX_HEALTH_POINT;
+        this.speed = 1;
     }
 
     @Override
@@ -30,6 +31,18 @@ public class Herbivore extends Creature {
     public void eat(Coordinates coordinates, GameMap map) {
         if (getTargetClass().isInstance(map.getEntity(coordinates))) {
             map.removeEntity(coordinates);
+            if (healthPoint < MAX_HEALTH_POINT) {
+                recoverHp();
+            }
+
+        }
+    }
+
+    private void recoverHp() {
+        int nutritionValue = new Grass().getNutritionValue();
+        while (healthPoint < MAX_HEALTH_POINT && nutritionValue > 0) {
+            healthPoint++;
+            nutritionValue--;
         }
     }
 

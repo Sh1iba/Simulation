@@ -11,7 +11,7 @@ public class Predator extends Creature {
 
     public Predator() {
         this.healthPoint = 100;
-        this.speed = 6;
+        this.speed = 2;
         this.attackPower = 25;
     }
 
@@ -34,7 +34,7 @@ public class Predator extends Creature {
         if (getTargetClass().isInstance(map.getEntity(coordinates))) {
             Creature creature = (Creature) map.getEntity(coordinates);
             creature.healthPoint -= attackPower;
-            if (creature.healthPoint == 0) {
+            if (creature.healthPoint <= 0) {
                 map.removeEntity(coordinates);
             }
         }
