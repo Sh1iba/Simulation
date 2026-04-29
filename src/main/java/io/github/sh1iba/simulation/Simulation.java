@@ -1,18 +1,5 @@
 package main.java.io.github.sh1iba.simulation;
 
-/*
-TODO Simulation
-   Главный класс приложения, включает в себя:
-    Карту
-    Счётчик ходов
-    Рендерер поля
-    Actions - список действий, исполняемых перед стартом симуляции или на каждом ходу (детали ниже)
-    /
-    Методы:
-    nextTurn() - просимулировать и отрендерить один ход
-    startSimulation() - запустить бесконечный цикл симуляции и рендеринга
-    pauseSimulation() - приостановить бесконечный цикл симуляции и рендеринга
- */
 
 import main.java.io.github.sh1iba.simulation.actions.Action;
 import main.java.io.github.sh1iba.simulation.actions.init.*;
@@ -21,7 +8,6 @@ import main.java.io.github.sh1iba.simulation.actions.turn.MovePredatorsAction;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Simulation {
     private int counterOfMoves = 0;
@@ -39,8 +25,7 @@ public class Simulation {
     private final GameMap map = new GameMap(50, 20);
     private final List<Action> initActions = new ArrayList<>();
     private final List<Action> turnActions = new ArrayList<>();
-    private final Scanner scanner = new Scanner(System.in);
-    private static volatile boolean running = false;
+    private boolean running = true;
 
     public Simulation() {
         addInitActions();
@@ -48,31 +33,40 @@ public class Simulation {
         for (Action action : initActions) {
             action.perform(map);
         }
-        printSimulation();
+        print();
         launch();
     }
 
     public void startSimulation() {
-        running = true;
         while (true) {
-            if (running) {
-                nextTurn();
+            synchronized (this) {
+                while (!running) {
+                    try {
+                        this.wait();
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        return;
+                    }
+                }
             }
+            System.out.println("сосать");
+            nextTurn();
         }
     }
 
-    public void launch(){
-        var runnable = new SimulationRunnable(this);
+    public void launch() {
+        var runnable = new InputRunnable(this);
         var thread = new Thread(runnable);
         //var thread = new Thread(this::pauseSimulation);
+        thread.setDaemon(true);
         thread.start();
     }
 
-    public void pauseSimulation() {
-        while (true) {
-            String str = scanner.nextLine();
+    public void pauseSimulation(String str) {
+        synchronized (this) {
             if (str.equals("F") || str.equals("f")) {
                 running = !running;
+                if (running) this.notifyAll();
             }
         }
     }
@@ -83,18 +77,19 @@ public class Simulation {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                Thread.currentThread().interrupt();
+                return;
             }
-            printSimulation();
+            print();
         }
     }
 
-    private void printSimulation() {
+    private void print() {
         System.out.printf(COUNTER_OF_MOVES_BANNER, counterOfMoves++);
         System.out.println();
         renderer.render(map);
         System.out.println();
-        System.out.println(SIMULATION_MENU_BANNER);
+        System.out.print(SIMULATION_MENU_BANNER);
     }
 
     private void addInitActions() {
