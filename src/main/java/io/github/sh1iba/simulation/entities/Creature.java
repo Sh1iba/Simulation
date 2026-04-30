@@ -10,9 +10,9 @@ import java.util.List;
 
 public abstract class Creature extends Entity {
 
-    public int speed = 0;
+    protected int speed = 0;
 
-    public int healthPoint = 0;
+    protected int healthPoint = 0;
 
     private final Search search = new BreadthFirstSearch();
 
@@ -30,15 +30,24 @@ public abstract class Creature extends Entity {
                 return;
             }
 
-            map.removeEntity(current);
             if (map.getEntity(next) == null) {
                 map.setEntity(next, this);
+                map.removeEntity(current);
+                current = next;
+                i++;
+            } else {
+                return;
             }
 
-            current = next;
-            i++;
-
         }
+    }
+
+    protected void takeDamage(int damage) {
+        healthPoint -= damage;
+    }
+
+    protected boolean isDead() {
+        return healthPoint <= 0;
     }
 
     abstract public Class<? extends Entity> getTargetClass();

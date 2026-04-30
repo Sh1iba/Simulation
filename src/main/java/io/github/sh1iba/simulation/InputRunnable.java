@@ -2,7 +2,7 @@ package main.java.io.github.sh1iba.simulation;
 
 import java.util.Scanner;
 
-public class InputRunnable implements Runnable{
+public class InputRunnable implements Runnable {
 
     private final Simulation simulation;
     private final Scanner scanner;
@@ -14,7 +14,7 @@ public class InputRunnable implements Runnable{
 
     @Override
     public void run() {
-        while (true){
+        while (true) {
             String str = scanner.nextLine();
             simulation.pauseSimulation(str);
         }

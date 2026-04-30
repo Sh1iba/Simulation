@@ -14,7 +14,7 @@ public class MapConsoleRenderer {
                     System.out.print(entity.getSymbol());
                     continue;
                 }
-                System.out.printf("%s",EMPTY_CELL_CONTENT);
+                System.out.printf("%s", EMPTY_CELL_CONTENT);
             }
             System.out.println();
         }

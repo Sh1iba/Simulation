@@ -33,8 +33,8 @@ public class Predator extends Creature {
     public void attack(Coordinates coordinates, GameMap map) {
         if (getTargetClass().isInstance(map.getEntity(coordinates))) {
             Creature creature = (Creature) map.getEntity(coordinates);
-            creature.healthPoint -= attackPower;
-            if (creature.healthPoint <= 0) {
+            creature.takeDamage(attackPower);
+            if (creature.isDead()) {
                 map.removeEntity(coordinates);
             }
         }

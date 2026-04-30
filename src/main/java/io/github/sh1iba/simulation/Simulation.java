@@ -3,6 +3,8 @@ package main.java.io.github.sh1iba.simulation;
 
 import main.java.io.github.sh1iba.simulation.actions.Action;
 import main.java.io.github.sh1iba.simulation.actions.init.*;
+import main.java.io.github.sh1iba.simulation.actions.turn.AddGrassAction;
+import main.java.io.github.sh1iba.simulation.actions.turn.AddHerbivoresAction;
 import main.java.io.github.sh1iba.simulation.actions.turn.MoveHerbivoresAction;
 import main.java.io.github.sh1iba.simulation.actions.turn.MovePredatorsAction;
 
@@ -17,9 +19,9 @@ public class Simulation {
             ╚══════════════════════════╝
             """;
     private static final String SIMULATION_MENU_BANNER = """
-            ╔═══════════════════════════════════════════════╗
-            ║  Введите 'F' для остановки/запуска симуляции  ║
-            ╚═══════════════════════════════════════════════╝
+            ╔══════════════════════════════════════════════════════╗
+            ║  Введите 'F' или 'f' для остановки/запуска симуляции  ║
+            ╚══════════════════════════════════════════════════════╝
             """;
     private final MapConsoleRenderer renderer = new MapConsoleRenderer();
     private final GameMap map = new GameMap(50, 20);
@@ -49,7 +51,6 @@ public class Simulation {
                     }
                 }
             }
-            System.out.println("сосать");
             nextTurn();
         }
     }
@@ -74,14 +75,14 @@ public class Simulation {
     private void nextTurn() {
         for (Action action : turnActions) {
             action.perform(map);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                return;
-            }
-            print();
         }
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            return;
+        }
+        print();
     }
 
     private void print() {
@@ -103,6 +104,8 @@ public class Simulation {
     private void addTurnAction() {
         turnActions.add(new MoveHerbivoresAction());
         turnActions.add(new MovePredatorsAction());
+        turnActions.add(new AddGrassAction());
+        turnActions.add(new AddHerbivoresAction());
     }
 
 }

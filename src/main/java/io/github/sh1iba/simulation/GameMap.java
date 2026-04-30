@@ -9,7 +9,7 @@ public class GameMap {
     private final int width;
     private final int height;
 
-    HashMap<Coordinates, Entity> map = new HashMap<>();
+    private final HashMap<Coordinates, Entity> map = new HashMap<>();
 
     public GameMap(int width, int height) {
         this.width = width;

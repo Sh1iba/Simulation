@@ -39,11 +39,8 @@ public class Herbivore extends Creature {
     }
 
     private void recoverHp() {
-        int nutritionValue = new Grass().getNutritionValue();
-        while (healthPoint < MAX_HEALTH_POINT && nutritionValue > 0) {
-            healthPoint++;
-            nutritionValue--;
-        }
+        int nutritionValue = Grass.getNutritionValue();
+        healthPoint = Math.min(healthPoint + nutritionValue, MAX_HEALTH_POINT);
     }
 
     @Override
